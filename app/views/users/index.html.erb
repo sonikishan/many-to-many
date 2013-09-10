@@ -1,0 +1,22 @@
+<table class="table table-striped table-hover">
+  <thead>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Department</th>
+    <th>Groups</th>
+    <th colspan="2"></th>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+        <tr>
+          <td><%= user.first_name %></td>
+          <td><%= user.last_name %></td>
+          <td><%= user.department%></td>
+          <td><%= user.groups.map { |g| g.name }.join(", ") %></td>
+          <td><%= link_to("Edit", edit_user_path(user)) %></td>
+          <td><%= link_to("Delete", user, :method => :delete, :confirm => "Are you sure you want to permanently delete #{ user.first_name }?") %></td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to("Add a User", new_user_path, :class => "btn btn-primary") %>
